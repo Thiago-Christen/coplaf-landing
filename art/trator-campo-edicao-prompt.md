@@ -1,0 +1,11 @@
+# Trator no campo — edição 16:9
+
+Editada com ImageGen built-in a partir da imagem enviada pelo usuário. Remoção da tipografia do post, data, marca, botão e elementos gráficos; expansão generativa da paisagem e campo de visão ampliado. O arquivo original enviado foi preservado. As áreas reconstruídas são conteúdo gerado, não registro fotográfico adicional do local.
+
+Arquivo final: `trator-campo-16x9-sem-texto.png`.
+
+## Prompt utilizado
+
+```text
+Use case: precise-object-edit. Edit target: the supplied portrait photograph of a green tractor with yellow wheels in a green agricultural field. Remove every superimposed text, date, branding logo, button, and graphic decoration: the upper '28/JULHO', 'DIA DO AGRICULTOR' and its huge broken lines, all white outline lettering, the black rounded 'Mostrar mais posts de coplaf' button, the small bottom COPLAF logo, the pale translucent large curved/diagonal graphics on the right, and borders. Reconstruct authentic continuous grass, sky, tree line, and any covered tractor details. Produce one clean realistic landscape photograph in horizontal 16:9, ideally 1920x1080. Expand the field of view substantially by outpainting both sides and pulling the camera back with a wider-angle rectilinear lens, approximately 24 mm, not by stretching the tractor or merely cropping the portrait. Preserve the SAME tractor design, green body, yellow wheel rims, gray-white cabin roof, black rubber tires, glass cabin and existing front three-quarter angle with the hood pointing left; preserve the rear attached agricultural implement to the right, naturally complete any clipped parts and show the entire tractor with generous breathing room. Keep the tractor around the central area, but smaller relative to the full landscape, with much more field visible left and right and in front, a distant leafy tree line, soft pale sky and natural daytime lighting. Preserve the rural scene, realistic machine geometry and subdued natural greens. Remove the original social-post color overlay for a clean photographic result, without changing time of day. No extra vehicles, added people, buildings, text, logos, watermark, decorative graphics, black bars, borders, collage, fisheye or exaggerated saturation.
+```

@@ -1,0 +1,25 @@
+const {chromium}=require('C:/Users/thiag/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {pathToFileURL}=require('url');
+const path=require('path');
+const fs=require('fs');
+(async()=>{
+  const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true,args:['--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+  const page=await browser.newPage({viewport:{width:390,height:844}});
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(pathToFileURL(path.resolve(__dirname,'../dist/index.html')).href,{waitUntil:'domcontentloaded'});
+  await page.waitForFunction(()=>window.COPLAF_DEMO?.loadedFrames>10,{timeout:15000});
+  await page.waitForFunction(()=>!window.COPLAF_INTRO?.active);
+  await page.locator('#state-select').selectOption('SC');
+  const select=await page.locator('#state-name').textContent();
+  await page.emulateMedia({reducedMotion:'reduce'});await page.reload({waitUntil:'domcontentloaded'});
+  await page.waitForFunction(()=>window.COPLAF_DEMO?.loadedFrames>=1);
+  await page.waitForFunction(()=>!window.COPLAF_INTRO?.active);
+  await page.evaluate(()=>scrollTo({top:300,behavior:'instant'}));await page.waitForTimeout(300);
+  const reduced=await page.evaluate(()=>window.COPLAF_DEMO.frame===0);
+  const movie=fs.readFileSync(path.resolve(__dirname,'../output/coplaf-sequencia-florestal.webm')).toString('base64');
+  const moviePage=await browser.newPage();
+  await moviePage.setContent('<video id="movie" muted></video>');
+  const video=await moviePage.evaluate(async base64=>{const v=document.querySelector('video');v.src='data:video/webm;base64,'+base64;await new Promise((resolve,reject)=>{v.onloadeddata=resolve;v.onerror=reject;});return {width:v.videoWidth,height:v.videoHeight,ready:v.readyState};},movie);
+  await browser.close();console.log(JSON.stringify({directFile:true,stateSelect:select,reducedMotion:reduced,video,errors}));
+  if(select!=='Santa Catarina'||!reduced||video.width!==1280||video.height!==720||errors.length)process.exitCode=1;
+})().catch(e=>{console.error(e.message);process.exitCode=1;});

@@ -1,0 +1,17 @@
+# Local previews, test captures and delivery archives
+output/
+qa/
+.sites-runtime/
+node_modules/
+__pycache__/
+*.pyc
+
+# Local credentials and environment settings
+.env
+.env.*
+*.pem
+*.key
+
+# Keep art provenance; original working images stay on this computer
+art/*
+!art/*.md

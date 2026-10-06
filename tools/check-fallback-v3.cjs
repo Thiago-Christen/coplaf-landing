@@ -1,0 +1,11 @@
+const {chromium}=require('C:/Users/thiag/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const assert=require('node:assert/strict'),path=require('node:path');
+(async()=>{const b=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
+try{const p=await b.newPage({viewport:{width:390,height:844}});const errors=[];p.on('pageerror',e=>errors.push(e.message));
+await p.route(/fonts\.googleapis|fonts\.gstatic/,r=>r.abort());await p.addInitScript(()=>{window.VideoDecoder=undefined});
+await p.goto('http://127.0.0.1:4173',{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>COPLAF_FILM.ready&&!COPLAF_INTRO.active,null,{timeout:90000});
+await p.waitForTimeout(1000);await p.screenshot({path:path.resolve(__dirname,'../output/v3-inicio-mobile.png')});
+await p.mouse.move(190,500);await p.mouse.wheel(0,2000);await p.waitForTimeout(1200);
+const result=await p.evaluate(()=>({mode:COPLAF_FILM.mode,verified:COPLAF_FILM.verified,frame:COPLAF_FILM.frame,preload:document.getElementById('forest-video').preload}));
+assert.equal(result.mode,'video');assert.equal(result.verified,596);assert.equal(result.preload,'auto');assert.ok(result.frame>100);assert.deepEqual(errors,[]);console.log(JSON.stringify({passed:true,...result}));
+}finally{await b.close()}})().catch(e=>{console.error(e);process.exit(1)});
