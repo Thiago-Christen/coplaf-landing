@@ -2,6 +2,7 @@
 output/
 qa/
 .sites-runtime/
+.github-cli-local/
 node_modules/
 __pycache__/
 *.pyc
